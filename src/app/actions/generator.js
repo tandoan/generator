@@ -93,5 +93,11 @@ export function updateEmail(text){
 }
 
 export function submitForm(){
-	return { type: types.SUBMIT_INFO }
+    return { type: types.SUBMIT_INFO }
 }
+
+export function setFontSize(size){
+    return { type: types.SET_FONT_SIZE, size:size }
+}
+
+

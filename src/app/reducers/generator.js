@@ -10,7 +10,8 @@ ZOOM_OUT_IMAGE,
  UPDATE_TERMS,
  SUBMIT_INFO,
  IMAGE_LOAD_SUCCESS,
- GET_INITIAL_DATE
+ GET_INITIAL_DATE,
+ SET_FONT_SIZE
 } from '../constants/ActionTypes';
   
 import { sprintf } from 'sprintf-js';
@@ -171,6 +172,13 @@ export default function generator(state = initialState, action){
 		case UPDATE_EMAIL:
 			return Object.assign({}, state, {
 				email: action.text
+			});
+
+		case SET_FONT_SIZE:
+			return Object.assign({}, state, {
+				captionStyle: Object.assign({}, state.captionStyle, {
+					fontSize: action.size
+				})
 			})
 		// case SUBMIT_INFO:
 

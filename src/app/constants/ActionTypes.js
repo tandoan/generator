@@ -20,3 +20,4 @@ export const UPDATE_TERMS = 'UPDATE_TERMS';
 export const SUBMIT_INFO = 'SUBMIT_INFO';
 
 export const GET_INITIAL_DATE = 'GET_INITIAL_DATE';
+export const SET_FONT_SIZE = 'SET_FONT_SIZE';

@@ -1,6 +1,7 @@
 import React from 'react';
 import { sprintf } from 'sprintf-js';
 import moment from 'moment';
+import { CAPTION_LIMITS } from '../constants/Settings';
 
 var css = require('./preview.css');
 
@@ -49,16 +50,26 @@ var Preview = React.createClass({
     	return m.format('YYYY');
     },
 
-    componentWillReceiveProps: function(nextProps) {
-        console.log('willreceive',this.props, nextProps);
-        let oldCaption = this.props.generator.caption;
+
+    componentDidUpdate: function(nextProps) {
         let newCaption = nextProps.generator.caption;
+        let targetFontSize = CAPTION_LIMITS[0].fontSize; 
+
+        // linear search for the font size based on length of text
+        for(var i=0; i< CAPTION_LIMITS.length;i++){
+            if(newCaption.length > CAPTION_LIMITS[i]['length']){
+                targetFontSize = CAPTION_LIMITS[i].fontSize; 
+            }
+        }
+        if(targetFontSize != this.props.generator.captionStyle.fontSize){
+            this.props.actions.setFontSize(targetFontSize);
+        }
     },
 
     render: function () {
         const { generator } = this.props;
 
-       return (
+        return (
 
         <div className="AssholeGenerator preview-container" >
             <div className="hero-container">
