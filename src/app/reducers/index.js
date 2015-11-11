@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
-// import { routerStateReducer } from 'redux-router';
+import { routerStateReducer } from 'redux-router';
 import generator from './generator';
 
 const reducer = combineReducers({
-  // router: routerStateReducer,
+  router: routerStateReducer,
   generator: generator
 });
 

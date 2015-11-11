@@ -1,6 +1,6 @@
 import { devTools } from 'redux-devtools';
 import createHistory from 'history/lib/createBrowserHistory';
-// import { reduxReactRouter } from 'redux-router';
+import { reduxReactRouter } from 'redux-router';
 import { createStore, compose, applyMiddleware } from 'redux';
 
 import thunk from 'redux-thunk';
@@ -16,12 +16,20 @@ export default function configureStore(initialState){
 
 	if (process.env.NODE_ENV === 'production') {
 		configureStore = compose(
-			applyMiddleware(...middleware)
+			applyMiddleware(...middleware),
+			reduxReactRouter({
+			    // routes,
+			    createHistory
+			  })
 	// 		reduxReactRouter({ createHistory })
 		)(createStore);
 	} else {
 		configureStore = compose(
-			applyMiddleware(thunk)
+			applyMiddleware(thunk),
+			reduxReactRouter({
+			    // routes,
+			    createHistory
+			  })
 			// reduxReactRouter({ createHistory })
 			,devTools()
 		)(createStore);
