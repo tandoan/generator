@@ -15,23 +15,19 @@ var App = React.createClass({
     const links = [
       '/',
       '/generator'
-      // '/parent?foo=bar',
-      // '/parent/child?bar=baz',
-      // '/parent/child/123?baz=foo'
     ].map(l =>
      <li>
-        <Link to={l}>{l}</Link>
+        <Link to={l} role="presentation">{l}</Link>
       </li>
     );
 
-console.log('app props',this.props);
     return (
       <div>
-        <h1>App Container</h1>
-        <ul>{links}</ul>
+
+        <ul className="nav nav-tabs">{links}</ul>
 
         <div className="main-content">
-          { this.props.content || <Main/>}
+          { this.props.children }
         </div>
       </div>
     );

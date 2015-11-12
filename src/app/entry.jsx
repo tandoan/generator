@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import configureStore from './store/configureStore';
 import { connect, Provider } from 'react-redux';
-import { Router, Route } from 'react-router';
+import { Router, Route, IndexRoute } from 'react-router';
 
 import { reduxReactRouter, routerStateReducer, ReduxRouter } from 'redux-router';
 
@@ -21,8 +21,8 @@ ReactDOM.render(
 <Provider store={store}>
 	<Router>
 		<Route path="/" component={App}>
-			<Route path="main" components={{ content: Main }}/>
-			<Route path="generator" components={{ content: Generator}}/>
+			<IndexRoute component={Main}/>
+			<Route path="generator" component={Generator}/>
 		</Route>
 	</Router>
 </Provider>
