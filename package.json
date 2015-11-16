@@ -10,7 +10,7 @@
     "test": "NODE_ENV=test mocha --recursive --compilers js:babel/register --require ./test/setup.js",
     "test:watch": "npm test -- --watch",
     "start": "webpack-dev-server --hot --inline --progress --colors ",
-    "dist": "webpack -p",
+    "dist": "NODE_ENV=production webpack -p",
     "watch": "npm-watch"
   },
   "author": "Tan Doan",
