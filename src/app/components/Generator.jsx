@@ -22,6 +22,7 @@ class Generator extends Component {
   render() {
     return (
       <div className="AssholeGenerator container">
+        <h1>Generator</h1>
         <div className="row">
           <div className="col-lg-7">
             <Preview {...this.props} />

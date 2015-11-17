@@ -54,7 +54,13 @@ module.exports = {
     },
     devServer: {
         contentBase: __dirname + '/src/app',
-        hot: true
+        hot: true,
+        proxy: {
+            '/api/save': {
+                target: 'localhost:9000/api/save',
+                secure: false
+            }
+        }
 
     }
 };

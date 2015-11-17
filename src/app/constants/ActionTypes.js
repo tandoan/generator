@@ -21,3 +21,8 @@ export const SUBMIT_INFO = 'SUBMIT_INFO';
 
 export const GET_INITIAL_DATE = 'GET_INITIAL_DATE';
 export const SET_FONT_SIZE = 'SET_FONT_SIZE';
+
+export const SAVING_START = 'SAVING_START';
+export const SAVING_DONE = 'SAVING_DONE';
+export const SAVE_SUCCESS = 'SAVE_SUCCESS';
+export const SAVE_FAIL = 'SAVE_FAIL';

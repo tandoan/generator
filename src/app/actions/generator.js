@@ -1,5 +1,16 @@
 import * as types from '../constants/ActionTypes';
 
+export function savingStart(){
+    return { type: types.SAVING_START };
+}
+export function savingDone(){
+    return { type: types.SAVING_DONE };
+}
+
+export function setSaveStatus(status){
+    return { type: status };
+}
+
 export function getInitialDate() {
     return { type: types.GET_INITIAL_DATE };
 }

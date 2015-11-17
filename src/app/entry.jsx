@@ -28,13 +28,3 @@ ReactDOM.render(
 </Provider>
 , document.getElementById('root')
 );
-// ReactDOM.render(
-
-// <Provider store={store}>
-// 	<Router>
-// 		<Route path="/" component={App}/>
-// 		<Route path="/generator" component={Generator}/>
-// 	</Router>
-// </Provider>
-// , document.getElementById('root')
-// )

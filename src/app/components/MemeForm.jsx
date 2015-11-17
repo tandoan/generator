@@ -1,13 +1,55 @@
 import React from 'react';
-var DateTimeField = require('react-bootstrap-datetimepicker');
-import { readImage, updateCaption } from '../actions/generator';
-
+import DateTimeField from 'react-bootstrap-datetimepicker';
+import request from 'superagent';
+import { SAVE_SUCCESS, SAVE_FAIL } from '../constants/ActionTypes';
 
 
 var MemeForm = React.createClass({
-	handldleSubmit: function(event){
+	handleSubmit: function(event){
 		event.preventDefault();
-		console.log('submitting')
+		const { generator } = this.props;
+
+		let dataObj = {
+			assholeBreed: generator.assholeBreed,
+			assholeName: generator.assholeName,
+			caption: generator.caption,
+			date: generator.date,
+			email: generator.email,
+			ownerName: generator.ownerName,
+
+			image: {
+				dataUri: generator.image.dataUri,
+				rotation: generator.image.rotation,
+				zoomRatio: generator.image.zoomRatio,
+				left: generator.heroStyle.left,
+				top: generator.heroStyle.top,
+				height: generator.heroStyle.height,
+				width: generator.heroStyle.width
+			}
+		} 
+
+		// show spinner
+		this.props.actions.savingStart();
+
+		let savingDone = this.props.actions.savingDone.bind(this);
+		let setSaveStatus = this.props.actions.setSaveStatus.bind(this);
+		request
+			.post('/api/save')
+			.send(dataObj)
+		  	.set('Accept', 'application/json')
+			.end(function(err, res){
+				//hide spinner
+				console.log('sending req')	
+				savingDone();
+
+				if(err){
+					setSaveStatus(SAVE_FAIL);
+				} else {
+					setSaveStatus(SAVE_FAIL);
+				}
+				console.log(err,res);
+			})
+
 	},
 	handleFile: function(event){
 		return this.props.actions.readImage(event, new FileReader());
@@ -142,7 +184,7 @@ var MemeForm = React.createClass({
 
 
 
-					<input type="button" value="Save" className="btn"/>
+					<input type="submit" value="Save" className="btn"/>
 
 				</form>
 			</div>

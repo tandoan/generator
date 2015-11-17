@@ -11,7 +11,11 @@ ZOOM_OUT_IMAGE,
  SUBMIT_INFO,
  IMAGE_LOAD_SUCCESS,
  GET_INITIAL_DATE,
- SET_FONT_SIZE
+ SET_FONT_SIZE,
+ SAVING_START,
+ SAVING_DONE,
+ SAVE_SUCCESS,
+ SAVE_FAIL
 } from '../constants/ActionTypes';
   
 import { sprintf } from 'sprintf-js';
@@ -29,10 +33,6 @@ const initialState = {
     image: {
     	path: '',
     	dataUri: '',
-	    height: null,
-	    width: null,
-	    posX: 0,
-	    posY: 0,
 	    rotation: 0,
 	    zoomRatio: 1,
 	    origZoomRatio:1
@@ -44,7 +44,10 @@ const initialState = {
     	overflow: 'hidden',
     	position: 'relative',
     	top:0,
-    	left:0
+    	left:0,
+    	msTransform: '',
+    	WebkitTransform: '',
+    	transform: '',
     	// background:'',
      //    borderBottom:'2px solid #FFAF2B',
      //    backgroundSize: '100% 100%'
@@ -56,6 +59,10 @@ const initialState = {
     },
     captionStyle: {
     	fontSize: 36	
+    },
+    saveStatus: {
+    	isSaving: false,
+    	success: null
     }
 }
 
@@ -87,14 +94,13 @@ function calculateZoomOut(state){
 	return state.image.zoomRatio - ( state.image.origZoomRatio * 0.05);
 }
 
-let m;
-
 export default function generator(state = initialState, action){
 	switch (action.type){
 
 		case GET_INITIAL_DATE: 
+
 			return Object.assign({}, state, {
-				date: new moment()
+				date:  moment().format('x')
 			});
 
 		case UPDATE_IMAGE_PATH: 
@@ -180,8 +186,34 @@ export default function generator(state = initialState, action){
 					fontSize: action.size
 				})
 			})
-		// case SUBMIT_INFO:
 
+		case SAVING_START:
+			return Object.assign({}, state, {
+				saveStatus: Object.assign({}, state.saveStatus, {
+					isSaving: true
+				})
+			})
+
+		case SAVING_DONE:
+			return Object.assign({}, state, {
+				saveStatus: Object.assign({}, state.saveStatus, {
+					isSaving: false
+				})
+			})
+
+		case SAVE_SUCCESS:
+			return Object.assign({}, state, {
+				saveStatus: Object.assign({}, state.saveStatus, {
+					success: true
+				})
+			})
+
+		case SAVE_FAIL:
+			return Object.assign({}, state, {
+				saveStatus: Object.assign({}, state.saveStatus, {
+					success: false
+				})
+			})
 
 		default:
 			return state;
