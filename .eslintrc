@@ -1,4 +1,5 @@
 {
+    "parser": "babel-eslint",
     "rules": {
         "indent": [
             2,
@@ -20,7 +21,6 @@
     "env": {
         "es6": true,
         "browser": true,
-        "amd": true,
         "node": true
     },
     "extends": "eslint:recommended",
