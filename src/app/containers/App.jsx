@@ -1,18 +1,16 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { Link, IndexLink } from 'react-router';
 import * as GeneratorActions from '../actions/generator';
 import { connect } from 'react-redux';
-import Main from '../components/Main';
 
-var App = React.createClass({
-  // propTypes: {
-  //   children: React.PropTypes.node
-  // },
+class App extends Component {
 
-  render: function() {
-    const { dispatch } = this.props
+  propTypes: {
+    children: React.PropTypes.node
+  }
 
+  render() {
     return (
       <div className="container">
 
@@ -36,7 +34,7 @@ var App = React.createClass({
       </div>
     );
   }
-});
+}
 
 function mapStateToProps(state) {
   return {
