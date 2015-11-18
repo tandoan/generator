@@ -138,7 +138,7 @@ class MemeForm extends Component {
 		return (
 			<div>
 
-				<form onSubmit={this.handleSubmit.bind(this):}>
+				<form onSubmit={this.handleSubmit.bind(this)}>
 
 					<h4>Upload Image</h4>
 
