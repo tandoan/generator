@@ -6,7 +6,6 @@ import MemeForm from './MemeForm';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as GeneratorActions from '../actions/generator';
-import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
 
 require('bootstrap/dist/css/bootstrap.css');
 require('font-awesome-webpack');
@@ -31,12 +30,10 @@ class Generator extends Component {
             <MemeForm {...this.props}/>
           </div>
         </div>
-
       </div>
       );
   }
 }
-
 
 function mapStateToProps(state) {
   return {
@@ -55,6 +52,3 @@ export default connect(
   mapDispatchToProps
 )(Generator);
                            
-     // <DebugPanel top right bottom>
-     //      <DevTools monitor={LogMonitor} store={this.props.store}/>
-     //    </DebugPanel>   

@@ -21,7 +21,7 @@ export function updateImagePath(path) {
 
 export function readImage(event, reader){
     let f = (dispatch, getState) => {
-        var file = event.target.files[0];
+        let file = event.target.files[0];
         dispatch(updateImagePath(file));
 
         reader.onload = function(upload){
@@ -35,7 +35,7 @@ export function readImage(event, reader){
 
 export function imageRead(dispatch, getState, upload){
 	return function(dispatch,getState){
-		var img = new Image();
+		let img = new Image();
 
         img.onload = function(){
         	dispatch(imageLoaded(img, getState));
@@ -47,19 +47,23 @@ export function imageRead(dispatch, getState, upload){
 
 export function imageLoaded(img, getState){
 
-	var currentState = getState().generator;
-	var zoomRatio = null;
+	let currentState = getState().generator;
+	let zoomRatio = null;
 
     if(img.naturalHeight >= img.naturalWidth) {
-        zoomRatio = currentState.heroStyle.height / img.naturalHeight;
+        zoomRatio = currentState.defaultHeroStyle.height / img.naturalHeight;
     } else {
-        zoomRatio = currentState.heroStyle.width / img.naturalWidth;
+        zoomRatio = currentState.defaultHeroStyle.width / img.naturalWidth;
     }
 
     return { type: types.IMAGE_LOAD_SUCCESS,
     	dataUri: img.src,
     	zoomRatio: zoomRatio,
     	origZoomRatio: zoomRatio,
+        heroStyle: {
+            height: img.naturalHeight * zoomRatio,
+            width: img.naturalWidth * zoomRatio
+        },
     	naturalImageDimensions: {
     		height: img.naturalHeight,
     		width: img.naturalWidth
