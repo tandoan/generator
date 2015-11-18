@@ -1,5 +1,9 @@
 import * as types from '../constants/ActionTypes';
 
+export function setErrors(errors){
+    return { type: types.SET_ERRORS, errors: errors};
+}
+
 export function savingStart(){
     return { type: types.SAVING_START };
 }

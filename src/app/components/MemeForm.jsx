@@ -12,9 +12,45 @@ class MemeForm extends Component {
 		event.target.parentNode.children.fileInput.click();
 	}
 
+	sanityCheck(){
+		let errors = [];
+		const { assholeName, caption, date, email, image, ownerName } = this.props.generator;
+		if(!assholeName) {
+			errors.push({message: 'We need a name for your asshole.'});
+		}
+		if(!caption) {
+			errors.push({message: 'We need a good reason here...'});
+		}
+		if(!date) {
+			errors.push({message: 'When is this going down?'});
+		}
+
+		if(!email) {
+			errors.push({message: 'What is your email?'});
+		}
+		
+		if(!ownerName) {
+			errors.push({message: 'What is your name?'});
+		}
+		
+		if(!image.dataUri) {
+			errors.push({message: 'Pics, or it didn\'t happen.'});
+		}
+
+		if(errors.length){
+			this.props.actions.setErrors(errors);
+			return false;
+		}
+		return true;
+	}
+
 	handleSubmit(event){
 		event.preventDefault();
 		const { generator } = this.props;
+
+		if(!this.sanityCheck()){
+			return;
+		}
 
 		let dataObj = {
 			assholeBreed: generator.assholeBreed,
@@ -197,6 +233,12 @@ class MemeForm extends Component {
 					</div>
 
 					<input type="submit" value="Save" className="btn"/>
+
+					<div>
+						{generator.errors.map(function(error){
+							return <p>{error.message}</p>
+						})}
+					</div>
 
 				</form>
 			</div>

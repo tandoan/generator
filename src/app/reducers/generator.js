@@ -15,13 +15,15 @@ import { UPDATE_IMAGE_PATH, ROTATE_IMAGE, ZOOM_IN_IMAGE,
 	SAVING_START,
 	SAVING_DONE,
 	SAVE_SUCCESS,
-	SAVE_FAIL
+	SAVE_FAIL,
+	SET_ERRORS
 } from '../constants/ActionTypes';
 
 import { sprintf } from 'sprintf-js';
 import moment from 'moment';
 
 const initialState = {
+	errors: [],
 	charLimit: 530,
 	filePath: '',
 	assholeName: '',
@@ -100,6 +102,11 @@ function calculateZoomOut(state){
 
 export default function generator(state = initialState, action){
 	switch (action.type){
+
+		case SET_ERRORS:
+		return Object.assign({}, state, {
+			errors: action.errors
+		});
 
 		case GET_INITIAL_DATE: 
 
