@@ -12,7 +12,7 @@ import { reduxReactRouter, routerStateReducer, ReduxRouter } from 'redux-router'
 import App from './containers/App';
 import Main from './components/Main';
 import Generator from './components/Generator';
-
+import Viewer from './components/Viewer';
 
 const store = configureStore();
 
@@ -23,6 +23,7 @@ ReactDOM.render(
 		<Route path="/" component={App}>
 			<IndexRoute component={Main}/>
 			<Route path="generator" component={Generator}/>
+			<Route path="view-page/:id" component={Viewer}/>
 		</Route>
 	</Router>
 </Provider>

@@ -32,7 +32,7 @@ class MemeForm extends Component {
 		if(!ownerName) {
 			errors.push({message: 'What is your name?'});
 		}
-		
+
 		if(!image.dataUri) {
 			errors.push({message: 'Pics, or it didn\'t happen.'});
 		}
@@ -88,7 +88,8 @@ class MemeForm extends Component {
 				if(err){
 					setSaveStatus(SAVE_FAIL);
 				} else {
-					setSaveStatus(SAVE_FAIL);
+					setSaveStatus(SAVE_SUCCESS);
+					// forward user to view 
 				}
 				console.log(err,res);
 			})
