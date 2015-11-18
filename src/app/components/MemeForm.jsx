@@ -138,7 +138,7 @@ class MemeForm extends Component {
 		return (
 			<div>
 
-				<form onSubmit={this.handleSubmit}>
+				<form onSubmit={this.handleSubmit.bind(this):}>
 
 					<h4>Upload Image</h4>
 
@@ -183,7 +183,7 @@ class MemeForm extends Component {
 					<div className="form-group">
 						<label htmlFor="captionInput">Why Are They An Asshole?</label>
 						<small style={{float:'right'}} className={ (generator.caption.length < 500)? 'bg-success' : (generator.caption.length < 520 ) ? 'bg-warning': 'bg-danger'  }>({generator.caption.length} of {generator.charLimit})</small>
-						<textarea id="captionInput" className="form-control caption-input" value={generator.caption} placeholder="i.e. Sacked Rome last Tuesday" onChange={this.handleCaptionChange} />
+						<textarea id="captionInput" className="form-control caption-input" value={generator.caption} placeholder="i.e. Sacked Rome last Tuesday" onChange={this.handleCaptionChange.bind(this)} />
 					</div>
 
 					<div className="form-group">
