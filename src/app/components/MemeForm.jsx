@@ -6,6 +6,12 @@ import { SAVE_SUCCESS, SAVE_FAIL } from '../constants/ActionTypes';
 
 class MemeForm extends Component {
 
+	triggerFileUpload(event){
+		event.preventDefault();
+		event.stopPropagation();
+		event.target.parentNode.children.fileInput.click();
+	}
+
 	handleSubmit(event){
 		event.preventDefault();
 		const { generator } = this.props;
@@ -137,8 +143,9 @@ class MemeForm extends Component {
 					<h4>Upload Image</h4>
 
 					<div className="form-group">
-						<label htmlFor="fileInput">Choose Picture</label>
-						<input id="fileInput" className="form-control" type="file" onChange={this.handleFile.bind(this)} accept="image/*"/>
+						<label htmlFor="fileTrigger">Choose Picture</label>
+						<button id="fileTrigger" className="form-control" onClick={this.triggerFileUpload.bind(this)}>{generator.image.path.name || 'Click to choose picture'}</button>
+						<input id="fileInput" className="form-control" type="file" onChange={this.handleFile.bind(this)} accept="image/*" style={{display:'none'}}/>
 						<p className="help-block">Choose a picture to upload</p>
 
 						<div className="btn-toolbar" role="toolbar" >
