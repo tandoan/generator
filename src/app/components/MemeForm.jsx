@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
 import DateTimeField from 'react-bootstrap-datetimepicker';
 import request from 'superagent';
 import { SAVE_SUCCESS, SAVE_FAIL } from '../constants/ActionTypes';
 
 
-var MemeForm = React.createClass({
-	handleSubmit: function(event){
+class MemeForm extends Component {
+
+	handleSubmit(event){
 		event.preventDefault();
 		const { generator } = this.props;
 
@@ -36,7 +37,7 @@ var MemeForm = React.createClass({
 		request
 			.post('/api/save')
 			.send(dataObj)
-		  	.set('Accept', 'application/json')
+			.set('Accept', 'application/json')
 			.end(function(err, res){
 				//hide spinner
 				console.log('sending req')	
@@ -50,11 +51,13 @@ var MemeForm = React.createClass({
 				console.log(err,res);
 			})
 
-	},
-	handleFile: function(event){
+	}
+
+	handleFile(event){
 		return this.props.actions.readImage(event, new FileReader());
-	},
-	handlePan: function(direction, event){
+	}
+
+	handlePan(direction, event){
 		let deltaX = 0;
 		let deltaY = 0;
 		let panDelta = 10;
@@ -73,21 +76,26 @@ var MemeForm = React.createClass({
             break;       
         }
 		return this.props.actions.panImage(deltaX, deltaY);
-	},
-	zoomIn: function(event){
+	}
+
+	zoomIn(event){
 		return this.props.actions.zoomInImage();
-	},
-	zoomOut: function(event){
+	}
+
+	zoomOut(event){
 		return this.props.actions.zoomOutImage();
-	},
-	handleRotate: function(direction,event){
+	}
+
+	handleRotate(direction,event){
 		return this.props.actions.rotateImage(direction);
-	},
-	handleDateChange: function(input){
+	}
+
+	handleDateChange(input){
 		return this.props.actions.updateDate(input);
 
-	},
-	handleChange: function(field,event){
+	}
+
+	handleChange(field,event){
 		switch(field){
 			case 'assholeName':
 				return this.props.actions.updateAssholeName(event.target.value);
@@ -96,12 +104,11 @@ var MemeForm = React.createClass({
 			case 'email':
 				return this.props.actions.updateEmail(event.target.value);
 		}
-	},
+	}
 
-
-	handleCaptionChange: function(event){
+	handleCaptionChange(event){
 		this.props.actions.updateCaption( event.target.value);
-	},
+	}
 
 	// propTypes: {
 	// 	assholeName: React.PropTypes.string.isRequired,
@@ -119,7 +126,7 @@ var MemeForm = React.createClass({
 	// 		caption: ''	
 	// 	};
 	// },
-	render: function () {
+	render(){
 		const { generator, actions } = this.props;
 		
 		return (
@@ -131,13 +138,13 @@ var MemeForm = React.createClass({
 
 					<div className="form-group">
 						<label htmlFor="fileInput">Choose Picture</label>
-						<input id="fileInput" className="form-control" type="file" onChange={this.handleFile} accept="image/*"/>
+						<input id="fileInput" className="form-control" type="file" onChange={this.handleFile.bind(this)} accept="image/*"/>
 						<p className="help-block">Choose a picture to upload</p>
 
 						<div className="btn-toolbar" role="toolbar" >
 							<div className="btn-group" role="group" >
-								<button className="btn btn-default" type="button" onClick={this.zoomIn}><i className="fa fa-search-plus"></i></button>
-								<button className="btn btn-default" type="button" onClick={this.zoomOut}><i className="fa fa-search-minus"></i></button>
+								<button className="btn btn-default" type="button" onClick={this.zoomIn.bind(this)}><i className="fa fa-search-plus"></i></button>
+								<button className="btn btn-default" type="button" onClick={this.zoomOut.bind(this)}><i className="fa fa-search-minus"></i></button>
 							</div>
 
 							<div className="btn-group" role="group" >
@@ -158,7 +165,7 @@ var MemeForm = React.createClass({
 
 					<div className="form-group" style={{position:'relative'}}>
 						<label>Date</label>
-						<DateTimeField mode="date" onChange={this.handleDateChange}/>
+						<DateTimeField mode="date" onChange={this.handleDateChange.bind(this)}/>
 					</div>
 
 					<div className="form-group">
@@ -182,14 +189,12 @@ var MemeForm = React.createClass({
 						<input id="email" className="form-control" placeholder="i.e. Kris@Kristofferson.com" type="text" onChange={this.handleChange.bind(this, 'email')} value={generator.email}/>
 					</div>
 
-
-
 					<input type="submit" value="Save" className="btn"/>
 
 				</form>
 			</div>
-			);
+		);
+	}
 }
-});
 
 export default MemeForm;

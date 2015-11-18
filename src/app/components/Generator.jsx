@@ -1,15 +1,15 @@
 'use strict';
 
-import React, { PropTypes, Component } from 'react';
-import Preview from './Preview'
-import MemeForm from './MemeForm'
+import React, { Component } from 'react';
+import Preview from './Preview';
+import MemeForm from './MemeForm';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as GeneratorActions from '../actions/generator';
 import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
 
-var BootstrapCSS = require('bootstrap/dist/css/bootstrap.css');
-var FontAwesome = require("font-awesome-webpack");
+require('bootstrap/dist/css/bootstrap.css');
+require('font-awesome-webpack');
 
 class Generator extends Component {
 

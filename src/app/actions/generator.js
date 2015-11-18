@@ -22,7 +22,7 @@ export function updateImagePath(path) {
 export function readImage(event, reader){
     let f = (dispatch, getState) => {
         var file = event.target.files[0];
-        dispatch(updateImagePath(file))
+        dispatch(updateImagePath(file));
 
         reader.onload = function(upload){
             dispatch(imageRead(dispatch,getState, upload))
